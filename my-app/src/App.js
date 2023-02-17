@@ -1,21 +1,43 @@
 import React, { useState } from "react";
 import "./App.css";
 
-function TodoList({ todos, delTodo, toggleComplete }) {
+function TodoList({ todos, delTodo, toggleComplete, editTodo }) {
   return (
     <div>
       <h2>Ma Todo List</h2>
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
-            <h3>{todo.title}</h3>
-            <p>{todo.text}</p>
-            <input
-              type="checkbox"
-              checked={todo.complete}
-              onChange={() => toggleComplete(todo.id)}
-            />
-            <button onClick={() => delTodo(todo.id)}> Supprimer</button>
+            {todo.editText ? (
+              <div>
+                <textarea
+                  type="text"
+                  rows="5"
+                  value={todo.text}
+                  onChange={(event) =>
+                    editTodo({ ...todo, text: event.target.value })
+                  }
+                />
+                <button onClick={() => editTodo({ ...todo, editText: false })}>
+                  Enregistrer
+                </button>
+              </div>
+            ) : (
+              <>
+                <span className="bloc">
+                  <h3>{todo.title}</h3>
+                  <input
+                    type="checkbox"
+                    checked={todo.complete}
+                    onChange={() => toggleComplete(todo.id)}
+                  />
+                </span>
+                <p onClick={() => editTodo({ ...todo, editText: true })}>
+                  {todo.text}
+                </p>
+                <button onClick={() => delTodo(todo.id)}> Supprimer</button>
+              </>
+            )}
           </li>
         ))}
       </ul>
@@ -88,6 +110,17 @@ function App() {
     );
   };
 
+  const editTodo = (updatedTodo) => {
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === updatedTodo.id) {
+          return updatedTodo;
+        }
+        return todo;
+      })
+    );
+  };
+
   return (
     <div>
       <AddTodo addTodo={addTodo} />
@@ -95,6 +128,7 @@ function App() {
         todos={todos}
         delTodo={delTodo}
         toggleComplete={toggleComplete}
+        editTodo={editTodo}
       />
     </div>
   );

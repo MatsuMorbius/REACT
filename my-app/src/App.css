@@ -57,7 +57,7 @@ h2 {
 }
 
 h3 {
-  margin-top: 0;
+  margin: 0;
   font-size: 18px;
 }
 
@@ -88,7 +88,7 @@ label {
   display: block;
 }
 input {
-  margin: 10px;
+  margin: 0px;
 }
 .container {
   display: flex; /* or inline-flex */
@@ -97,4 +97,14 @@ input {
   justify-content: center;
   max-width: 50%;
   margin-left: 25%;
+}
+.bloc {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+.status {
+  margin: 0;
+  font-size: 18px;
+  text-decoration: line-through;
 }
