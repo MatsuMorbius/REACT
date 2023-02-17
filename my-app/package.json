@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "PUBLIC_URL=https://matsumorbius.github.io/REACT npm run build",
+    "predeploy": "PUBLIC_URL=https://matsumorbius.github.io/REACT PUBLIC_URL=https://matsumorbius.github.io/REACT npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
